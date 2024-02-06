@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IslamicGPSbot.</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #000000;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  #chat-container {
+    width: 400px;
+    height: 500px;
+    border-radius: 10px;
+    background-color: #000000;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    overflow-y: auto;
+    position: relative;
+    background-image: linear-gradient(to bottom right, #55a50b, #62ff00, #58de1f, #3fdc13, #21871d, #30841b, #63c61d);
+  }
+  #messages {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  .user-message, .bot-message {
+    max-width: 70%;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #fff;
+    font-weight: bold;
+  }
+  .user-message {
+    background-color: #1e1c1c;
+    align-self: flex-end;
+  }
+  .bot-message {
+    background-color: #000000;
+  }
+  input[type="text"] {
+    width: calc(100% - 70px);
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    margin-right: 10px;
+    background-color: #000000;
+    color: #ffffff;
+  }
+  button {
+    padding: 10px 20px;
+    background-color: #000000;
+    border: none;
+    border-radius: 20px;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #000000;
+  }
+</style>
+</head>
+<body>
+<div id="chat-container">
+  <ul id="messages"></ul>
+  <div style="display: flex; align-items: center;">
+    <input type="text" id="user-input" placeholder="Type a message...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<script>
+const botResponses = {
+  "hi":["Hello!"],
+  "how are you":"I'm just a bot, but thanks for asking!",
+  "whats your name":["I'm Omar, your friendly chatbot."],
+  "bye":["Goodbye! Have a great day!"],
+  "tell me a joke": "Why don't scientists trust atoms? Because they make up everything!",
+  "who is ali":["Ali Ibn Abi Talib (RA) was Muhammad (PBUH)’s great companion, cousin, and Son in law. He gave his life for the cause of Islam and spread the words of knowledge."],
+  "who created you":["I was created by a kind boy who dreams of being a coder when he grows up."],
+  "ahhhh":["I'm sorry, I don't understand that. Ask me something else!"],
+  "who is omar":["Hazrat Umar (RA) was the son of Khattab. He was initially a non-Muslim but converted to Islam later. After his becoming Muslim, he was given the title of “Al-Farooq” meaning the one who distinguishes the right from wrong. His conversion to Islam is also one of the most remarkable events in Islamic history."],
+  "who is uthman":["ʿUthmān ibn ʿAffān, (died June 17, 656, Medina, Arabian Peninsula), third caliph to rule after the death of the Prophet Muhammad. He centralized the administration of the caliphate and established an official version of the Qurʾān."],
+  "islamic months":["The Islamic months are: Muharram, Safar, Rabi' al-Awwal, Rabi' al-Thani, Jumada al-Awwal, Jumada al-Thani, Rajab, Sha'ban, Ramadan, Shawwal, Dhu al-Qi'dah, Dhu al-Hijjah"],
+  "info":["These are all the commands: hi, how are you,whats your name, bye, tell me a joke, who is ali, who created you, who is omar, who is uthman, islamic months, when does ramadan happen, who is abu bakr, what is the moon cycle, about."],
+  "naat playlist":["you can listen to arabic nasheeds on the channel @themercifulservant"],
+  "who is abu bakr":["Abu Bakr was an early convert of Islam and a close friend and confidant of the Islamic Prophet Muhammad He became the first caliph of the Islamic empire after Muhammad's death in 632During his reign, he overcame a number of uprisings, collectively known as the Ridda wars, as a result of which he was able to consolidate and expand the rule of the Muslim state over the entire Arabian peninsula"],
+"when does ramadan happen":["The first and last dates of Ramadan are determined by the lunar Islamic calendar. Beginning Because the Hilāl, or crescent moon, typically occurs approximately one day after the new moon, Muslims can usually estimate the beginning of Ramadan; however, many prefer to confirm the opening of Ramadan by the moon sighting."],
+"what is the moon cycle":["The eight lunar phases are, in order: new moon, waxing crescent, first quarter, waxing gibbous, full moon, waning gibbous, third quarter and waning crescent. The cycle repeats once a month (every 29.5 days)."],
+"about":["I am an ai that answers islamic questions and also tells in what location you can find mosques you have never been to!"],
+"who is prophet mohammad":["Muhammad was the prophet of allah. Most of his early life was spent as a merchant. At age 40, he began to have revelations from Allah that became the basis for the Koran and the foundation of Islam. By 630 he had unified most of Arabia under a single religion. As of 2015, there are over 1.8 billion Muslims in the world who profess, “There is no God but Allah, and Muhammad is his prophet.”"],
+"who is ": [""],
+};
+
+function sendMessage() {
+  const userInput = document.getElementById("user-input").value;
+  if (userInput.trim() === "") return;
+
+  displayMessage(userInput, "user-message");
+  const botResponse = getBotResponse(userInput.toLowerCase().trim());
+  displayMessage(botResponse, "bot-message");
+  document.getElementById("user-input").value = "";
+}
+
+function getBotResponse(userInput) {
+  return botResponses[userInput] || botResponses["ahhhh"];
+}
+
+function displayMessage(message, className) {
+  const messagesContainer = document.getElementById("messages");         
+  const li = document.createElement("li");
+  li.textContent = message;
+  li.classList.add(className);
+  messagesContainer.appendChild(li);
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Processing</title>
+    <script>
+        function processURL() {
+            // Get the input value
+            var url = document.islamicgps100.com('urlInput').value;
+
+            // Regular expression for URL validation
+            var urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+
+            // Check if the URL is valid
+            if (urlRegex.test(url)) {
+                // Display the valid URL
+                document.islamicgps100.com('result').innerHTML = "Valid URL: " + url;
+            } else {
+                // Display an error message for invalid URL
+                document.islamicgps100.com('result').innerHTML = "Invalid URL. Please enter a valid URL.";
+            }
+        }
+    </script>
+</head>
+<body>
+    <style>
+      body {
+            background-color: black;
+            color: white;
+            font-family: 'Roboto Mono', monospace;
+            margin: 70px;
+        }  
+    </style>
+    <h2>URL Processing</h2>
+    
+    <form>
+        <label for="urlInput">Enter URL:</label>
+        <input type="text" id="urlInput" name="urlInput" required>
+        <button type="button" onclick="processURL()">Process URL</button>
+    </form>
+
+    <p id="result"></p>
+</body>
+<p>©Islamic GPS 2024 all rights reserved.</p>
+</html>

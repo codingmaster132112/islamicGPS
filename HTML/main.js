@@ -60,7 +60,7 @@ let switchCtn = document.querySelector("#switch-cnt");
             })
             .then(response => {
                 if (response.ok) {
-                    window.location.href = "dashboard.html";
+                    window.location.href = "mainpage.html";
                 } else {
                     alert("Invalid username/password combination");
                 }
